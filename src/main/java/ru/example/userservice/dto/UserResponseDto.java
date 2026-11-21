@@ -1,12 +1,28 @@
 package ru.example.userservice.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
+
 import java.time.LocalDateTime;
 
-public class UserResponseDto {
+@Schema(description = "Ответ с данными пользователя и HATEOAS-ссылками")
+@Relation(collectionRelation = "users", itemRelation = "user")
+public class UserResponseDto extends RepresentationModel<UserResponseDto> {
+
+    @Schema(description = "Уникальный идентификатор пользователя", example = "1")
     private Long id;
+
+    @Schema(description = "Имя пользователя", example = "Алексей")
     private String name;
+
+    @Schema(description = "Электронная почта", example = "alex@mail.com")
     private String email;
+
+    @Schema(description = "Возраст пользователя", example = "25")
     private Integer age;
+
+    @Schema(description = "Дата и время создания записи", example = "2026-11-21T11:00:00")
     private LocalDateTime createdAt;
 
     public UserResponseDto() {}
